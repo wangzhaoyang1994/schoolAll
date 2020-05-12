@@ -6,37 +6,36 @@
       </a>
       <div class="demo-input-suffix">
         用户名：
-        <el-input placeholder="请输入用户名">
+        <el-input placeholder="请输入用户名" class="userName" v-model="userName">
           <i slot="prefix" class="el-input__icon el-icon-s-custom"></i>
         </el-input>
       </div>
       <div class="demo-input-suffix">
         密&nbsp;&nbsp;&nbsp;码：
-        <el-input placeholder="请输入密码">
+        <el-input placeholder="请输入密码" class="passWord" v-model="passWord">
           <i slot="prefix" class="el-input__icon el-icon-lock"></i>
         </el-input>
       </div>
       <div class="demo-input-suffix three">
         验证码：
-        <el-input placeholder="请输入验证码">
+        <el-input placeholder="请输入验证码" class="verCode" v-model="verCode">
           <i slot="prefix" class="el-input__icon el-icon-bell"></i>
         </el-input>
         <img :src="yzm" class="yzmImg" @click="imgVal()" />
       </div>
       <div class="forbut">
         <el-row>
-          <el-button type="primary" round>登录</el-button>
+          <el-button type="primary" round @click="register">登录</el-button>
           <el-button type="info" round>取消</el-button>
         </el-row>
       </div>
-      <p v-text="testVal"></p>
-      <p v-text="testVal"></p>
     </div>
   </div>
 </template>
 <script>
 import imgUrl from "../../assets/images/close.jpg";
-import { changVerify, niHao, testParam } from "../../api/verifyCode";
+import { changVerify } from "../../api/verifyCode";
+import { userLogin } from "../../api/UserLogin";
 export default {
   props: {
     isshow: {
@@ -50,8 +49,9 @@ export default {
       height: 20,
       showt: this.isshow,
       yzm: "",
-      nihao: "",
-      testVal: ""
+      userName: "",
+      passWord: "",
+      verCode: ""
     };
   },
   watch: {
@@ -61,8 +61,6 @@ export default {
   },
   mounted: function() {
     this.imgVal();
-    this.hao();
-    this.testP();
   },
   methods: {
     closeWindow() {
@@ -73,18 +71,54 @@ export default {
       var date = new Date().getTime();
       this.yzm = baseUrl + "/verify/getVerify?" + date; //不缓存
     },
-    hao() {
-      niHao().then(re => {
-        this.nihao = re.data;
-      });
-    },
-    testP() {
-      let params = {
-        id: 1
-      };
-      testParam(params).then(re => {
-        this.testVal = re.data;
-      });
+    register() {
+      const userName = this.userName;
+      const passWord = this.passWord;
+      const verCode = this.verCode;
+      const status = false;
+      const baseUrl = process.env.BASE_API;
+      if (userName == "") {
+        alert("请输入用户名");
+        return status;
+      }
+      if (passWord == "") {
+        alert("请输入密码");
+        return status;
+      }
+      if (verCode == "") {
+        alert("请输入验证码");
+        return status;
+      }
+      this.$axios
+        .get(baseUrl + "/login/register", {
+          // 还可以直接把参数拼接在url后边
+          params: {
+            userName: userName,
+            passWord: passWord,
+            verCode: verCode
+          }
+        })
+        .then(res=> {
+          if (!res.data.status && res.data.error == 1) {
+            this.$toast(res.data.msg);
+          }
+          if (!res.data.status && res.data.error == 2) {
+            this.$toast(res.data.msg);
+          }
+          if (!res.data.status && res.data.error == 3) {
+            this.$toast(res.data.msg);
+            this.imgVal();
+          }
+          if (res.data.status && res.data.error == 0) {
+            this.$toast(res.data.msg);
+            this.$router.push({
+              path:'/ht'
+            })
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

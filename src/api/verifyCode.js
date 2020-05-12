@@ -7,16 +7,9 @@ export function changVerify(params) {
       params
     })
   }
-  export function niHao(params) {
+  export function findUser(params) {
     return request({
-      url: '/verify/nihao',
-      method:'get',
-      params
-    })
-  }
-  export function testParam(params) {
-    return request({
-      url: '/verify/testParam',
+      url: '/user/findAll',
       method:'get',
       params
     })
