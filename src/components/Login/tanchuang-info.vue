@@ -110,6 +110,7 @@ export default {
             this.imgVal();
           }
           if (res.data.status && res.data.error == 0) {
+            window.localStorage.setItem("role",res.data.user.role)
             this.$toast(res.data.msg);
             this.$router.push({
               path:'/ht'

@@ -20,37 +20,10 @@
 				<el-aside style="background-color: rgb(238, 241, 246);width: 18%;">
 					<el-scrollbar style="width: 100%;">
 						<el-menu>
-							<el-submenu index="1">
-								<template slot="title"><i class="el-icon-s-tools"></i>权限管理</template>
+							<el-submenu :index="item.menuName" v-for="(item,index) in menuList" :key="index">
+								<template slot="title"><i class="el-icon-s-tools"></i>{{ item.menuName }}</template>
 								<el-menu-item-group>
-									<el-menu-item index="1-1">选项1</el-menu-item>
-									<el-menu-item index="1-2">选项2</el-menu-item>
-									<el-menu-item index="1-3">选项3</el-menu-item>
-								</el-menu-item-group>
-							</el-submenu>
-							<el-submenu index="2">
-								<template slot="title"><i class="el-icon-user-solid"></i>用户管理</template><!--template这个标签里面不能写click,可能是跟自带的click事件冲突-->
-								<el-menu-item-group>
-									<el-menu-item index="2-1"  @click="showStuList()">学生管理</el-menu-item>
-									<el-menu-item index="2-2"  @click="showTeaList()">教师管理</el-menu-item>
-								</el-menu-item-group>
-							</el-submenu>
-							<el-submenu index="3">
-								<template slot="title"><i class="el-icon-notebook-2"></i>课程管理</template>
-								<el-menu-item-group>
-									<el-menu-item index="3-1">课程管理</el-menu-item>
-								</el-menu-item-group>
-							</el-submenu>
-							<el-submenu index="4">
-								<template slot="title"><i class="el-icon-view"></i>门户管理</template>
-								<el-menu-item-group>
-									<el-menu-item index="4-1">新闻类管理</el-menu-item>
-									<el-menu-item index="4-2">文章管理</el-menu-item>
-									<el-menu-item index="4-3">友情链接管理</el-menu-item>
-									<el-menu-item index="4-4" @click="showPic()">图片管理</el-menu-item>																		
-									<el-menu-item index="4-5">导航栏管理</el-menu-item>																		
-									<el-menu-item index="4-6">名师分类管理</el-menu-item>									
-									<el-menu-item index="4-7">名师管理</el-menu-item>
+									<el-menu-item :index="item1.menuName" v-for="(item1,index) in item.children" :key="index"><router-link :to="item1.component">{{ item1.menuName }}</router-link></el-menu-item>
 								</el-menu-item-group>
 							</el-submenu>
 						</el-menu>
@@ -66,26 +39,28 @@
 
 <script>
 	import imgUrl from '../../assets/images/userPic.png'
+	import { menuList } from '../../api/menuList'
 	export default {
 		data() {
 			return {
-				src: imgUrl
+				src: imgUrl,
+				menuList:{}
 			}
 		},
+		mounted:function(){
+			this.getMenuList()
+		},
+		watch:{
+
+		},
 		methods:{
-			showStuList(){
-				this.$router.push({
-					path:'/stuList',
-				})
-			},
-			showTeaList(){
-				this.$router.push({
-					path:'/teaList',
-				})
-			},
-			showPic(){
-				this.$router.push({
-					path:'/addPic',
+			getMenuList(){
+				let param={
+					role:window.localStorage.getItem("role")
+				}
+				menuList(param).then(re => {
+					this.menuList=re.data.menuList
+					console.log(this.menuList);
 				})
 			}
 		}
@@ -148,5 +123,8 @@
 	
 	.el-container {
 		height: 877px;
+	}
+	.el-menu-item a{
+		text-decoration:none
 	}
 </style>

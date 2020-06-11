@@ -5,6 +5,8 @@ import ht from '@/components/ht/ht'
 import stuList from '@/components/user/stuList'
 import teaList from '@/components/user/teaList'
 import addPic from '@/components/mh/addPic'
+import addUser from '@/components/quanxian/addUser'
+import updateUser from '@/components/quanxian/updateUser'
 
 Vue.use(Router)
 
@@ -19,7 +21,7 @@ export default new Router({
       name: 'ht',
       component: ht,
       children: [{
-          path: '/stuList',
+          path: '/ht/cdgl',
           name: 'stuList',
           component: stuList
         },
@@ -32,6 +34,16 @@ export default new Router({
           path: '/addPic',
           name: 'addPic',
           component: addPic
+        },
+        {
+          path:'/addUser',
+          name:'addUser',
+          component:addUser
+        },
+        {
+          path:'/updateUser',
+          name:'updateUser',
+          component:updateUser
         }
       ]
     }
