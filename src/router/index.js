@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/Login/login'
 import ht from '@/components/ht/ht'
-import stuList from '@/components/user/stuList'
+import cdgl from '@/components/user/cdgl'
 import teaList from '@/components/user/teaList'
 import addPic from '@/components/mh/addPic'
 import addUser from '@/components/quanxian/addUser'
@@ -22,8 +22,8 @@ export default new Router({
       component: ht,
       children: [{
           path: '/ht/cdgl',
-          name: 'stuList',
-          component: stuList
+          name: 'cdgl',
+          component: cdgl
         },
         {
           path: '/teaList',

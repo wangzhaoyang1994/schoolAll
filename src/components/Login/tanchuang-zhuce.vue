@@ -96,6 +96,9 @@ export default {
       this.closeWindow()
     },
     closeWindow() {
+      this.userName=""
+      this.passWord=""
+      this.role=""
       this.$parent.showzhuce = false; //这里不能直接this.showt=false;(不能给这个变量一个确定的参数，要不然父组件传来的值不能起作用，要通过watch来监听父组件的值),所以要改变父组件的值
     }
   }
