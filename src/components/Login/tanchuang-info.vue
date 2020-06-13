@@ -26,7 +26,7 @@
       <div class="forbut">
         <el-row>
           <el-button type="primary" round @click="register">登录</el-button>
-          <el-button type="info" round>取消</el-button>
+          <el-button type="info" round @click="cancleTc">取消</el-button>
         </el-row>
       </div>
     </div>
@@ -63,13 +63,16 @@ export default {
     this.imgVal();
   },
   methods: {
+    cancleTc(){
+      this.closeWindow()
+    },
     closeWindow() {
       this.$parent.showthis = false; //这里不能直接this.showt=false;(不能给这个变量一个确定的参数，要不然父组件传来的值不能起作用，要通过watch来监听父组件的值),所以要改变父组件的值
     },
     imgVal() {
       const baseUrl = process.env.BASE_API;
       var date = new Date().getTime();
-      this.yzm = baseUrl + "/verify/getVerify?" + date; //不缓存
+      this.yzm = baseUrl + "/verify/getVerify?date=" + date; //不缓存
     },
     register() {
       const userName = this.userName;

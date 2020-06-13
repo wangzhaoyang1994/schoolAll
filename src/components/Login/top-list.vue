@@ -22,6 +22,9 @@
             <a href="#" class="KKWZ" @click="forLogin()">
               <b>登录</b>
             </a>
+            <a href="#" class="KKWZ" @click="zhuce()">
+              <b>注册</b>
+            </a>
           </div>
         </div>
         <div class="clear"></div>
@@ -74,6 +77,9 @@ export default {
 methods:{
   forLogin(){
     this.$parent.showthis=true;
+  },
+  zhuce(){
+    this.$parent.showzhuce=true
   }
 }
 };

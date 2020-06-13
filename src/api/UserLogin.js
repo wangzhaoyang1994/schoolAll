@@ -6,3 +6,10 @@ export function userLogin(params) {
       params
     })
   }
+export function userZc(params){
+    return request({
+      url:'/user/zhuce',
+      method:'get',
+      params
+    })
+}

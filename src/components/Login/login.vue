@@ -4,6 +4,7 @@
     <index-list />
     <footer-list />
     <tanchuang-info :isshow="showthis"/>
+    <tanchuang-zhuce :iszhuce="showzhuce" />
   </div>
 </template>
 <script>
@@ -11,19 +12,22 @@ import topList from "./top-list";
 import indexList from "./index-list";
 import footerList from "./footer-list";
 import tanchuangInfo from "./tanchuang-info";
+import tanchuangZhuce from "./tanchuang-zhuce"
 import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../../../node_modules/bootstrap/dist/js/bootstrap";
 export default {
   data() {
     return {
-      showthis:false
+      showthis:false,
+      showzhuce:false
     };
   },
   components: {
     topList,
     indexList,
     footerList,
-    tanchuangInfo
+    tanchuangInfo,
+    tanchuangZhuce
   },
 };
 </script>
