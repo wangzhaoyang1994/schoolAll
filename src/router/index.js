@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import login from '@/components/Login/login'
 import ht from '@/components/ht/ht'
 import cdgl from '@/components/user/cdgl'
+import yhgl from '@/components/user/yhgl'
+
+
 import teaList from '@/components/user/teaList'
 import addPic from '@/components/mh/addPic'
 import addUser from '@/components/quanxian/addUser'
@@ -25,6 +28,14 @@ export default new Router({
           name: 'cdgl',
           component: cdgl
         },
+        {
+          path: '/ht/yhgl',
+          name: 'yhgl',
+          component:yhgl
+        },
+
+
+
         {
           path: '/teaList',
           name: 'teaList',

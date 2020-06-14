@@ -84,8 +84,7 @@ export default {
   }
 };
 </script>
-
-<style>
+<style scoped>
 .el-header,
 .el-footer {
   background-color: #b3c0d1;
@@ -110,6 +109,7 @@ export default {
 .el-image {
   position: absolute;
   right: 128px;
+  top:5px;
 }
 
 .el-image__inner {

@@ -12,7 +12,7 @@
       </div>
       <div class="demo-input-suffix">
         密&nbsp;&nbsp;&nbsp;码：
-        <el-input placeholder="请输入密码" class="passWord" v-model="passWord">
+        <el-input placeholder="请输入密码" class="passWord" v-model="passWord" type="password">
           <i slot="prefix" class="el-input__icon el-icon-lock"></i>
         </el-input>
       </div>

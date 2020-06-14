@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import { get } from 'jquery'
 export function userLogin(params) {
     return request({
       url: '/login/register',
@@ -9,6 +10,13 @@ export function userLogin(params) {
 export function userZc(params){
     return request({
       url:'/user/zhuce',
+      method:'get',
+      params
+    })
+}
+export function findAll(params){
+    return request({
+      url:'/user/findAll',
       method:'get',
       params
     })
