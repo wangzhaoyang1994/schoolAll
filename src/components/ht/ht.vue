@@ -2,12 +2,7 @@
   <div class="ht">
     <el-container>
       <el-header>
-        <el-image :src="src" style="width: 50px; height: 50px">
-          <div slot="placeholder" class="image-slot">
-            加载中
-            <span class="dot">...</span>
-          </div>
-        </el-image>
+        <img :src="src" style="width: 50px; height: 50px"/>
         <el-dropdown @command="callBack">
           <span class="el-dropdown-link">
             超级管理员
@@ -51,17 +46,17 @@
 </template>
 
 <script>
-import imgUrl from "../../assets/images/userPic.png";
 import { menuList } from "../../api/menuList";
 export default {
   data() {
     return {
-      src: imgUrl,
+      src: "",
       menuList: {}
     };
   },
   mounted: function() {
     this.getMenuList();
+    this.src=window.localStorage.getItem("userimg")
   },
   watch: {},
   methods: {
@@ -105,7 +100,7 @@ export default {
   color: #333;
 }
 
-.el-image {
+img {
   position: absolute;
   right: 128px;
   top:5px;

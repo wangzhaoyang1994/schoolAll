@@ -21,3 +21,10 @@ export function findAll(params){
       params
     })
 }
+export function updateUser(params){
+    return request({
+      url:'/user/updateUser',
+      method:'get',
+      params
+    })
+}
