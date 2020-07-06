@@ -5,7 +5,7 @@ import ht from '@/components/ht/ht'
 import cdgl from '@/components/user/cdgl'
 import yhgl from '@/components/user/yhgl'
 import qxfp from '@/components/quanxian/qxfp'
-
+import lbtgl from '@/components/mh/lbtPic'
 Vue.use(Router)
 
 export default new Router({
@@ -32,10 +32,12 @@ export default new Router({
           path: '/ht/qxfp',
           name:'qxfp',
           component:qxfp
+        },
+        {
+          path:'/ht/lbtgl',
+          name:'lbtPic',
+          component:lbtgl
         }
-
-
-        
       ]
     }
   ]
