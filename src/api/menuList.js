@@ -20,3 +20,16 @@ export function menuListPage(params){
     params
   })
 }
+export function findAllMenu(params){
+  return request({
+    url:'/menu/findAllMenu',
+    method:'get',
+    params
+  })
+}
+export function menuSure(data,role){
+  return request({
+    url:'/menu/menuSure/'+data+'/'+role,
+    method:'post',
+  })
+}

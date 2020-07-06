@@ -28,3 +28,10 @@ export function updateUser(params){
       params
     })
 }
+export function selectRole(params){
+    return request({
+      url:'/user/selectRole',
+      method:'get',
+      params
+    }) 
+}

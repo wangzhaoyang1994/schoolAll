@@ -4,12 +4,7 @@ import login from '@/components/Login/login'
 import ht from '@/components/ht/ht'
 import cdgl from '@/components/user/cdgl'
 import yhgl from '@/components/user/yhgl'
-
-
-import teaList from '@/components/user/teaList'
-import addPic from '@/components/mh/addPic'
-import addUser from '@/components/quanxian/addUser'
-import updateUser from '@/components/quanxian/updateUser'
+import qxfp from '@/components/quanxian/qxfp'
 
 Vue.use(Router)
 
@@ -33,29 +28,14 @@ export default new Router({
           name: 'yhgl',
           component:yhgl
         },
-
-
-
         {
-          path: '/teaList',
-          name: 'teaList',
-          component: teaList
-        },
-        {
-          path: '/addPic',
-          name: 'addPic',
-          component: addPic
-        },
-        {
-          path:'/addUser',
-          name:'addUser',
-          component:addUser
-        },
-        {
-          path:'/updateUser',
-          name:'updateUser',
-          component:updateUser
+          path: '/ht/qxfp',
+          name:'qxfp',
+          component:qxfp
         }
+
+
+        
       ]
     }
   ]
