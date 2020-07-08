@@ -13,3 +13,10 @@ export function addPic(params){
       params
     })
 }
+export function exportExcel(params){
+  return request({
+      url: '/pic/exportExcel',
+    method:'get',
+    params
+  })
+}

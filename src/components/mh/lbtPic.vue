@@ -1,6 +1,7 @@
 <template>
   <div class="yhgl-list">
     <el-button type="success" @click="addPic">添加图片</el-button>
+    <el-button type="success" @click="exportExcel">导出excel</el-button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column
         v-for="(item,index) in headData"
@@ -63,7 +64,7 @@
 </template>
 
 <script>
-import { getPicListByPage, addPic } from "../../api/Picture";
+import { getPicListByPage, addPic,exportExcel } from "../../api/Picture";
 export default {
   data() {
     return {
@@ -76,7 +77,8 @@ export default {
       userimgV: "",
       form: {
         name: "",
-        pictureAddress: ""
+        pictureAddress: "",
+        lastPage:0
       },
       formLabelWidth: "120px",
       headData: [
@@ -113,6 +115,7 @@ export default {
       getPicListByPage(params).then(res => {
           this.tableData=res.data.picList.list
           this.total=res.data.picList.total
+          this.form.lastPage=res.data.picList.lastPage
       });
     },
     handleSizeChange(val) {
@@ -146,6 +149,9 @@ export default {
           this.$refs.uploadpic.clearFiles(); //上传完成之后，清空之前的图片列表
         }
       });
+    },
+    exportExcel(){
+      location.href=process.env.BASE_API + "/pic/exportExcel?current="+this.currentPage+"&pageSize="+this.pageSize; //图片到处必须用location.href ，不能使用ajax，文件导出相当于打开了一个新页面
     }
   }
 };

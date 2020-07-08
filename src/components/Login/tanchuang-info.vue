@@ -61,15 +61,22 @@ export default {
   },
   mounted: function() {
     this.imgVal();
+    var lett = this;
+    document.onkeydown = function(e) {
+      var key = window.event.keyCode;
+      if (key == 13) {
+        lett.register();
+      }
+    };
   },
   methods: {
-    cancleTc(){
-      this.closeWindow()
+    cancleTc() {
+      this.closeWindow();
     },
     closeWindow() {
-      this.userName=""
-      this.passWord=""
-      this.verCode=""
+      this.userName = "";
+      this.passWord = "";
+      this.verCode = "";
       this.$parent.showthis = false; //这里不能直接this.showt=false;(不能给这个变量一个确定的参数，要不然父组件传来的值不能起作用，要通过watch来监听父组件的值),所以要改变父组件的值
     },
     imgVal() {
@@ -104,7 +111,7 @@ export default {
             verCode: verCode
           }
         })
-        .then(res=> {
+        .then(res => {
           if (!res.data.status && res.data.error == 1) {
             this.$toast(res.data.msg);
           }
@@ -116,12 +123,12 @@ export default {
             this.imgVal();
           }
           if (res.data.status && res.data.error == 0) {
-            window.localStorage.setItem("role",res.data.user.role)
-            window.localStorage.setItem("userimg",res.data.user.userimg)
+            window.localStorage.setItem("role", res.data.user.role);
+            window.localStorage.setItem("userimg", res.data.user.userimg);
             this.$toast(res.data.msg);
             this.$router.push({
-              path:'/ht'
-            })
+              path: "/ht"
+            });
           }
         })
         .catch(function(error) {
