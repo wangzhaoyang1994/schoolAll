@@ -6,6 +6,10 @@ import cdgl from '@/components/user/cdgl'
 import yhgl from '@/components/user/yhgl'
 import qxfp from '@/components/quanxian/qxfp'
 import lbtgl from '@/components/mh/lbtPic'
+import xwflgl from '@/components/mh/xwflgl'
+import xwgl from '@/components/mh/xwgl'
+import ditu from '@/components/mh/ditu'
+import addnews from '@/components/base/addnews'
 Vue.use(Router)
 
 export default new Router({
@@ -37,6 +41,26 @@ export default new Router({
           path:'/ht/lbtgl',
           name:'lbtPic',
           component:lbtgl
+        },
+        {
+          path:'/ht/xwflgl',
+          name:'xwflgl',
+          component:xwflgl
+        },
+        {
+          path:'/ht/xwgl',
+          name:'xwgl',
+          component:xwgl
+        },
+        {
+          path:'/ht/map',
+          name:'ditu',
+          component:ditu
+        },
+        {
+          path:'/ht/addnews',
+          name:'addnews',
+          component:addnews
         }
       ]
     }
