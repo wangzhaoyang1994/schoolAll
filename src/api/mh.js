@@ -35,3 +35,10 @@ export function getNewsList(params) {
     params
   })
 }
+export function addNews(params) {
+  return request({
+    url: '/mh/newList/addNews',
+    method: 'get',
+    params
+  })
+}

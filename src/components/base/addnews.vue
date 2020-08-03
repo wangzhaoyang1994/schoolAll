@@ -10,7 +10,6 @@
       <el-form-item label="活动名称" prop="newsName" required>
         <el-input v-model="ruleForm.newsName"></el-input>
       </el-form-item>
-     
       <el-form-item label="创建时间" required>
         <el-col :span="11">
           <el-form-item prop="createDate">
@@ -47,6 +46,8 @@
 </template>
 <script>
 import wangeditor from "../base/editor"
+import { addNews } from "../../api/mh"
+import dayjs from 'dayjs'
 export default {
   data() {
     return {
@@ -54,7 +55,9 @@ export default {
         newsName: "",
         createDate: "",
         updateDate: "",
-        content:""
+        content:"",
+        noticeId:0,
+        noticeName:''
       },
       rules: {
         newsName: [{ required: true, message: "请输入新闻名称", trigger: "blur" }],
@@ -71,7 +74,16 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          this.ruleForm.noticeId = parseInt(this.$route.query.noticeId)
+          this.ruleForm.noticeName = this.$route.query.noticeName
+          this.ruleForm.createDate = dayjs(this.ruleForm.createDate).format('YYYY-MM-DD')
+          this.ruleForm.updateDate = dayjs(this.ruleForm.updateDate).format('YYYY-MM-DD')
+          let params = {newList: JSON.stringify(this.ruleForm)}
+         
+          console.log('params',params)
+          addNews(params).then(res => {
+
+          })
         } else {
           console.log("error submit!!");
           return false;

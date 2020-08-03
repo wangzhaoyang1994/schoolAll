@@ -25,7 +25,7 @@ import { getNoticeNewList,getNewsList } from "../../api/mh";
 export default {
   data() {
     return {
-      activeName: "1",
+      activeName: "",
       noticeId:0,
       noticeName:'',
       noticeList: [],
@@ -51,7 +51,8 @@ export default {
       getNoticeNewList().then((res) => {
         this.noticeList = res.data.slice(0, 2);
         this.noticeName = this.noticeList[0].noticeNewName
-        this.noticeId = this.noticeList[0].id
+        this.noticeId = parseInt(this.noticeList[0].id)
+        this.activeName = this.noticeList[0].id+""
       });
     },
     getNewsList(){
