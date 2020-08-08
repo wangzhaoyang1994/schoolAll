@@ -1,148 +1,31 @@
 <template>
   <div class="ind">
-     <el-carousel :interval="4000" type="card" height="500px">
+    <el-carousel :interval="4000" type="card" height="500px">
       <el-carousel-item v-for="item in lunBoList" :key="item.id">
-        <img :src="item.picUrl" height="100%" width="900"  class="picUrl" style="">
+        <img :src="item.picUrl" height="100%" width="900" class="picUrl" style />
       </el-carousel-item>
     </el-carousel>
     <!--轮播 end-->
 
     <!--内容 start-->
     <div class="w_news_wrap container">
-      <div class="row">
-        <div class="col-md-6 w_news_l">
-          <div class>
-            <div class="w_news_head fl">
-              <h3>通知公告</h3>
+      <div class="leftNews" v-for="(item,index) in newList" :key="index">
+          <div class="titleDiv">{{ item.noticeNewName }}</div>
+          <div v-for="(item1,index1) in item.children" :key="index1">
+          <div class="newsDiv">
+            <div class="newsDate">
+              <h3>{{ item1.day }}</h3>
+              <span>{{ item1.yearMonth }}</span>
             </div>
-            <div class="fr w_more_wrap">
-              <a href="#">MORE..</a>
+            <div class="newsContent">
+              <a href="#" v-html="item1.content"></a>
             </div>
-            <div class="clear"></div>
-          </div>
-          <div class="w_new_list">
-            <!--新闻列表-->
-            <ul class="clearfix">
-              <div class="row">
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-              </div>
-            </ul>
           </div>
         </div>
-        <!--左侧新闻end-->
-
-        <div class="col-md-6 w_news_l">
-          <div class>
-            <div class="w_news_head fl">
-              <h3>通知公告</h3>
-            </div>
-            <div class="fr w_more_wrap">
-              <a href="#">MORE..</a>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <div class="w_new_list">
-            <!--新闻列表-->
-            <ul class="clearfix">
-              <div class="row">
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="newsDate col-md-2">
-                    <h3>13</h3>
-                    <p>2020-03</p>
-                  </span>
-                  <div class="newFont col-md-10">
-                    <a href="#">河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学河北大学</a>
-                  </div>
-                </li>
-              </div>
-            </ul>
-          </div>
-        </div>
-        <!--右侧新闻 end-->
       </div>
     </div>
     <!--内容 end-->
-    
+
     <!--经典项目 start-->
     <div class="indexTitle">
       <h3 class="jdxmName">经典项目</h3>
@@ -152,7 +35,7 @@
       <ul class="wrap1200 row">
         <li class="col-md-4 col-sm-6 col-xs-12" v-for="item in noticeList" :key="item.id">
           <a href="#">
-            <img :src="item.picUrl" width="400px" height="200px"/>
+            <img :src="item.picUrl" width="400px" height="200px" />
           </a>
         </li>
       </ul>
@@ -160,34 +43,48 @@
   </div>
 </template>
 <script>
-import { getPictureList,getNoticePictureList } from  '../../api/mh.js'
+import { getPictureList, getNoticePictureList,getMhNew } from "../../api/mh.js";
+import dayjs from 'dayjs';
 export default {
   data() {
     return {
-		lunBoList:[],
-		noticeList:[]
-	};
+      lunBoList: [],
+      noticeList: [],
+      newList:[]
+    };
   },
-  
-  mounted(){
-	  this.getLunboList()
-    this.getNoticePictureList()
+
+  mounted() {
+    this.getLunboList();
+    this.getNoticePictureList();
+    this.getMhNew()
   },
-  methods:{
-	  getLunboList(){
-		  getPictureList().then(res => {
-			  this.lunBoList=res.data
-		  })
-	  },
-	  getNoticePictureList(){
-		  getNoticePictureList().then(res => {
-			  this.noticeList=res.data
-		  })
-	  }
+  methods: {
+    getMhNew(){
+      getMhNew().then(res => {
+        this.newList = res.data
+        this.newList.forEach(item => {
+          item.children.forEach(item1 => {
+            item1.day = dayjs(item1.updateDate).format("DD")
+            item1.yearMonth = dayjs(item1.updateDate).format("YYYY-MM")
+          })
+        })
+      })
+    },
+    getLunboList() {
+      getPictureList().then((res) => {
+        this.lunBoList = res.data;
+      });
+    },
+    getNoticePictureList() {
+      getNoticePictureList().then((res) => {
+        this.noticeList = res.data;
+      });
+    },
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .indexTitle {
   text-align: center;
   padding: 30px 0;
@@ -432,7 +329,7 @@ export default {
   background: url("../../assets/images/old.png") no-repeat center top;
   margin: 116px auto 10px auto;
 }
-.programes{
+.programes {
   margin-bottom: 20px;
 }
 .programes ul li {
@@ -608,7 +505,62 @@ export default {
   margin: 60px auto;
 }
 .w_news_wrap {
-  margin-top: 50px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  .leftNews {
+    width: 50%;
+    height: 300px;
+    margin-right: 10px;
+    .titleDiv {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .newsDiv {
+      width: 100%;
+      height: 60px;
+      border-bottom: 1px #999 dashed;
+      margin-top: 10px;
+      display: flex;
+      position: relative;
+      .newsDate {
+        width: 15%;
+        border-right: 1px black solid;
+        height: 90%;
+        text-align: center;
+        position: relative;
+        h3 {
+          color: #000;
+          position: absolute;
+          left: 32%;
+          top: 10%;
+          font-size: 22px;
+          font-weight: bold;
+        }
+        span {
+          color: #000;
+          position: absolute;
+          left: 20%;
+          top: 60%;
+        }
+      }
+      .newsContent {
+        a {
+          color: #000;
+          position: absolute;
+          margin-left: 10px;
+          top: 55%;
+          transform: translateY(-50%);
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .rightNews {
+    width: 50%;
+    height: 300px;
+    background: red;
+  }
 }
 .w_more_wrap {
   margin-top: 20px;
@@ -637,43 +589,7 @@ export default {
   font-style: italic;
   font-weight: normal;
 }
-.w_new_list .newsDate {
-  text-align: center;
-}
-.w_new_list ul li {
-  height: 60px;
-  border-bottom: dotted 1px #5c666e;
-  position: relative;
-  margin-bottom: 10px;
-}
-.w_new_list .newsDate {
-  float: left;
-  border-right: solid 1px #d1d1d1;
-  height: 46px;
-  text-align: center;
-  line-height: 1;
-}
-.w_new_list .newsDate h3 {
-  font-size: 24px;
-  color: #555;
-  margin-top: 0px;
-}
-.w_new_list .newsDate p {
-  font-size: 14px;
-  color: #999;
-  margin-top: 0px;
-}
-.w_new_list .newFont {
-  padding-left: 10px;
-  font-size: 14px;
-  line-height: 47px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.w_new_list .newFont:hover {
-  font-weight: bold;
-}
+
 .w_new_list .newsGo {
   font-size: 30px;
   height: 42px;
@@ -687,5 +603,4 @@ export default {
   background: #666;
   color: #fff;
 }
-
 </style>

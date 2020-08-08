@@ -51,6 +51,7 @@ import dayjs from 'dayjs'
 export default {
   data() {
     return {
+      returnPath:'',
       ruleForm: {
         newsName: "",
         createDate: "",
@@ -67,6 +68,15 @@ export default {
   components:{
     wangeditor
   },
+  beforeRouteEnter(to,from,next){
+    next(vm => {
+      vm.returnPath = from.path
+    })
+  },
+  beforeRouteLeave(to,from,next){
+    this.$destroy()
+    next()
+  },
   mounted(){
     console.log('this.router',this.$route)
   },
@@ -82,7 +92,10 @@ export default {
          
           console.log('params',params)
           addNews(params).then(res => {
-
+            if(res.data == 1){
+              this.$toast("添加成功")
+              this.$router.push(this.returnPath)
+            }
           })
         } else {
           console.log("error submit!!");

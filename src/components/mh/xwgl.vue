@@ -3,74 +3,90 @@
     <el-button type="primary" icon="el-icon-plus" @click="addNews">添加新闻</el-button>
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
       <el-tab-pane
+        v-for="(item,index) in noticeList"
         :label="item.noticeNewName"
         :name="item.id+''"
-        v-for="(item,index) in noticeList"
         :key="index"
-      >
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column
-            v-for="(item,index) in headData"
-            :key="index"
-            :prop="item.prop"
-            :label="item.label"
-          ></el-table-column>
-        </el-table>
-      </el-tab-pane>
+      ></el-tab-pane>
     </el-tabs>
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column
+        v-for="(item1,index) in headData"
+        :key="index"
+        :prop="item1.prop"
+        :label="item1.lable"
+      ></el-table-column>
+    </el-table>
   </div>
 </template>
 <script>
-import { getNoticeNewList,getNewsList } from "../../api/mh";
+import { getNoticeNewList, getNewsList } from "../../api/mh";
+import dayjs from "dayjs";
 export default {
   data() {
     return {
       activeName: "",
-      noticeId:0,
-      noticeName:'',
+      noticeId: 0,
+      noticeName: "",
       noticeList: [],
       tableData: [],
       headData: [
-        { prop: "newsName", lable: "新闻名称" },
+        { prop: "newName", lable: "新闻名称" },
         { prop: "updateDate", lable: "更新时间" },
       ],
     };
   },
   mounted() {
-    this.getNoticeNewList();
-    this.getNewsList();
+    this.getNoticeNewList(0);
   },
   methods: {
     handleClick(val) {
-      this.noticeName = val.label
-      this.noticeId = parseInt(val.name)
+      this.noticeName = val.label;
+      this.noticeId = parseInt(val.name);
       console.log("tab", val.label);
       console.log("event", val.name);
+      this.getNoticeNewList(this.noticeId, this.noticeName);
     },
-    getNoticeNewList() {
+    getNoticeNewList(val, val1) {
       getNoticeNewList().then((res) => {
         this.noticeList = res.data.slice(0, 2);
-        this.noticeName = this.noticeList[0].noticeNewName
-        this.noticeId = parseInt(this.noticeList[0].id)
-        this.activeName = this.noticeList[0].id+""
+        let params;
+        if (val == 0) {
+          this.activeName = this.noticeList[0].id + "";
+          this.noticeName = this.noticeList[0].noticeNewName;
+          this.noticeId = parseInt(this.noticeList[0].id);
+          params = {
+            noticeId: this.noticeId,
+          };
+        } else {
+          this.activeName = val + "";
+          this.noticeName = val1;
+          this.noticeId = val;
+          params = {
+            noticeId: val,
+          };
+        }
+        getNewsList(params).then((res) => {
+          this.$nextTick(() => {
+            this.tableData = res.data;
+            this.tableData.forEach((item) => {
+              item.updateDate = dayjs(item.updateDate).format("YYYY-MM-DD");
+            });
+          });
+        });
       });
     },
-    getNewsList(){
-        getNewsList().then(res => {
-            this.tableData = res.data
-        })
+    addNews() {
+      this.$router.push({
+        name: "addnews",
+        query: { noticeId: this.noticeId, noticeName: this.noticeName },
+      });
     },
-    addNews(){
-        this.$router.push({
-            name:"addnews",
-            query:{noticeId:this.noticeId,noticeName:this.noticeName}
-        })
-    }
   },
 };
 </script>
 <style scoped lang="scss">
-.xwgl /deep/ .el-button{
-    margin-bottom: 20px;
+.xwgl /deep/ .el-button {
+  margin-bottom: 20px;
 }
 </style>

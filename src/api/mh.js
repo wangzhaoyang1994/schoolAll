@@ -42,3 +42,10 @@ export function addNews(params) {
     params
   })
 }
+export function getMhNew(params) {
+  return request({
+    url: '/mh/newNotice/getMhNew',
+    method: 'get',
+    params
+  })
+}
