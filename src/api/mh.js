@@ -49,3 +49,10 @@ export function getMhNew(params) {
     params
   })
 }
+export function getMhNewBySolr(params) {
+  return request({
+    url: '/mh/newNotice/solrNews',
+    method: 'get',
+    params
+  })
+}

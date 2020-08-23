@@ -1,5 +1,5 @@
 <template>
-  <div class="ind">
+  <div class="ind" ref="index-list">
     <el-carousel :interval="4000" type="card" height="500px">
       <el-carousel-item v-for="item in lunBoList" :key="item.id">
         <img :src="item.picUrl" height="100%" width="900" class="picUrl" style />
@@ -10,8 +10,8 @@
     <!--内容 start-->
     <div class="w_news_wrap container">
       <div class="leftNews" v-for="(item,index) in newList" :key="index">
-          <div class="titleDiv">{{ item.noticeNewName }}</div>
-          <div v-for="(item1,index1) in item.children" :key="index1">
+        <div class="titleDiv">{{ item.noticeNewName }}</div>
+        <div v-for="(item1,index1) in item.children" :key="index1">
           <div class="newsDiv">
             <div class="newsDate">
               <h3>{{ item1.day }}</h3>
@@ -43,33 +43,46 @@
   </div>
 </template>
 <script>
-import { getPictureList, getNoticePictureList,getMhNew } from "../../api/mh.js";
-import dayjs from 'dayjs';
+import {
+  getPictureList,
+  getNoticePictureList,
+  getMhNew,
+} from "../../api/mh.js";
+import dayjs from "dayjs";
+import bus from '../../utils/bus'
 export default {
   data() {
     return {
       lunBoList: [],
       noticeList: [],
-      newList:[]
+      newList: [],
     };
   },
-
+  watch:{
+    newList(val){
+      
+    }
+  },
   mounted() {
     this.getLunboList();
     this.getNoticePictureList();
-    this.getMhNew()
+    this.getMhNew();
+    bus.$on("on-click",msg => {
+      console.log("msgmsgmsg",msg)
+      this.newList = msg
+    })
   },
   methods: {
-    getMhNew(){
-      getMhNew().then(res => {
-        this.newList = res.data
-        this.newList.forEach(item => {
-          item.children.forEach(item1 => {
-            item1.day = dayjs(item1.updateDate).format("DD")
-            item1.yearMonth = dayjs(item1.updateDate).format("YYYY-MM")
-          })
-        })
-      })
+    getMhNew() {
+      getMhNew().then((res) => {
+        this.newList = res.data;
+        this.newList.forEach((item) => {
+          item.children.forEach((item1) => {
+            item1.day = dayjs(item1.updateDate).format("DD");
+            item1.yearMonth = dayjs(item1.updateDate).format("YYYY-MM");
+          });
+        });
+      });
     },
     getLunboList() {
       getPictureList().then((res) => {
