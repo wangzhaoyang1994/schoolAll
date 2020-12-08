@@ -1,17 +1,23 @@
 <template>
   <div class="ind" ref="index-list">
     <el-carousel :interval="4000" type="card" height="500px">
-      <el-carousel-item v-for="item in lunBoList" :key="item.id">
-        <img :src="item.picUrl" height="100%" width="900" class="picUrl" style />
+      <el-carousel-item v-for="(item, index) in lunBoList" :key="index">
+        <img
+          :src="item.picUrl"
+          height="100%"
+          width="900"
+          class="picUrl"
+          style
+        />
       </el-carousel-item>
     </el-carousel>
     <!--轮播 end-->
 
     <!--内容 start-->
     <div class="w_news_wrap container">
-      <div class="leftNews" v-for="(item,index) in newList" :key="index">
+      <div class="leftNews" v-for="(item, index) in newList" :key="index">
         <div class="titleDiv">{{ item.noticeNewName }}</div>
-        <div v-for="(item1,index1) in item.children" :key="index1">
+        <div v-for="(item1, index1) in item.children" :key="index1">
           <div class="newsDiv">
             <div class="newsDate">
               <h3>{{ item1.day }}</h3>
@@ -33,7 +39,11 @@
     </div>
     <div class="programes container" id="jdxmDiv">
       <ul class="wrap1200 row">
-        <li class="col-md-4 col-sm-6 col-xs-12" v-for="item in noticeList" :key="item.id">
+        <li
+          class="col-md-4 col-sm-6 col-xs-12"
+          v-for="(item, index) in noticeList"
+          :key="index"
+        >
           <a href="#">
             <img :src="item.picUrl" width="400px" height="200px" />
           </a>
@@ -49,7 +59,7 @@ import {
   getMhNew,
 } from "../../api/mh.js";
 import dayjs from "dayjs";
-import bus from '../../utils/bus'
+import bus from "../../utils/bus";
 export default {
   data() {
     return {
@@ -58,30 +68,31 @@ export default {
       newList: [],
     };
   },
-  watch:{
-    newList(val){
-      
-    }
+  watch: {
+    newList(val) {},
   },
   mounted() {
     this.getLunboList();
     this.getNoticePictureList();
     this.getMhNew();
-    bus.$on("on-click",msg => {
-      console.log("msgmsgmsg",msg)
-      this.newList = msg
-    })
+    bus.$on("on-click", (msg) => {
+      console.log("msgmsgmsg", msg);
+      this.newList = msg;
+    });
   },
   methods: {
     getMhNew() {
       getMhNew().then((res) => {
         this.newList = res.data;
-        this.newList.forEach((item) => {
-          item.children.forEach((item1) => {
-            item1.day = dayjs(item1.updateDate).format("DD");
-            item1.yearMonth = dayjs(item1.updateDate).format("YYYY-MM");
+        console.log(this.newList);
+        if (this.newList) {
+          this.newList.forEach((item) => {
+            item.children.forEach((item1) => {
+              item1.day = dayjs(item1.updateDate).format("DD");
+              item1.yearMonth = dayjs(item1.updateDate).format("YYYY-MM");
+            });
           });
-        });
+        }
       });
     },
     getLunboList() {
