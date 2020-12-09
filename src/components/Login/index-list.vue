@@ -74,16 +74,16 @@ export default {
   mounted() {
     this.getLunboList();
     this.getNoticePictureList();
-    this.getMhNews();
+    this.getMhNew();
     bus.$on("on-click", (msg) => {
       console.log("msgmsgmsg", msg);
       this.newList = msg;
     });
   },
   methods: {
-    getMhNews() {
+    getMhNew() {
       getMhNew().then((res) => {
-        this.newList = [];
+        this.newList = res.data;
         console.log(this.newList);
         if (this.newList.length > 0) {
           this.newList.forEach((item) => {
@@ -97,12 +97,12 @@ export default {
     },
     getLunboList() {
       getPictureList().then((res) => {
-        this.lunBoList = [];
+        this.lunBoList = res.data;
       });
     },
     getNoticePictureList() {
       getNoticePictureList().then((res) => {
-        this.noticeList = [];
+        this.noticeList = res.data;
       });
     },
   },
