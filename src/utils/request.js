@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+//axios.defaults.withCredentials = true
 const service = axios.create({
     baseURL: process.env.BASE_API, // api 的 base_url
     timeout: 50000, // request timeout

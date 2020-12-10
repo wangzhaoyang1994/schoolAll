@@ -82,7 +82,23 @@ export default {
     imgVal() {
       const baseUrl = process.env.BASE_API;
       var date = new Date().getTime();
-      this.yzm = baseUrl + "/verify/getVerify?date=" + date; //不缓存
+      //this.yzm = baseUrl + "/verify/getVerify?date=" + date; //不缓存
+      this.$axios.get(baseUrl + "/verify/getVerify?date=" + date,{
+        responseType: "arraybuffer",//这里是声明期望返回的数据类型
+      }).then(response => {
+          return (
+            "data:image/png;base64," +
+            btoa(
+              new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ''
+              )
+            )
+          );
+        })
+        .then(data => {
+          this.yzm = data; //赋值给img标签的src属性
+        });
     },
     register() {
       const userName = this.userName;

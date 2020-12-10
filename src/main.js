@@ -14,8 +14,8 @@ Vue.use(VueResource)
 Vue.use(Vant)
 import router from './router'
 import App from './App'
-Vue.prototype.$axios = axios;
 axios.defaults.withCredentials = true
+Vue.prototype.$axios = axios;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
