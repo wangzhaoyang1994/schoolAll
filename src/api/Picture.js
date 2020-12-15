@@ -8,15 +8,21 @@ export function getPicListByPage(params) {
 }
 export function addPic(params){
     return request({
-        url: '/pic/addPic',
+      url: '/pic/addPic',
       method:'get',
       params
     })
 }
 export function exportExcel(params){
   return request({
-      url: '/pic/exportExcel',
+    url: '/pic/exportExcel',
     method:'get',
     params
+  })
+}
+export function clearData(){
+  return request({
+    url: '/mh/picture/deleteRedis',
+      method:'get'
   })
 }
