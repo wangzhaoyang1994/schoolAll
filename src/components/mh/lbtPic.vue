@@ -2,7 +2,7 @@
   <div class="yhgl-list">
     <el-button type="success" @click="addPic">添加图片</el-button>
     <el-button type="success" @click="exportExcel">导出excel</el-button>
-    <el-button type="danger" @click="clearData">清除缓存数据</el-button>
+    <!-- <el-button type="danger" @click="clearData">清除缓存数据</el-button> -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column
         v-for="(item,index) in headData"
